@@ -22,12 +22,19 @@ def build_supervisor(llm="groq"):
                 "Check the order ID with validate_order_id, then save with log_complaint. "
                 "Ask for missing details. Never invent a complaint ID."),
     )
+    customer_support_agent = create_react_agent(
+        model=model,
+        tools=[],
+        name="customer_support_agent",
+        prompt=("After serving Customer, You have to collect user feedback"),
+    )
 
     supervisor = create_supervisor(
-        agents=[menu_agent, complaint_agent],
+        agents=[menu_agent, complaint_agent, customer_support_agent],
         model=model,
         prompt=("You are the manager of Xander Restaurant support. "
                 "Menu or price questions -> menu_agent. Complaints -> complaint_agent. "
+                "User feedback -> customer_support_agent."
                 "For greetings, answer yourself in one short line. "
                 "After a worker agent answers, write nothing more: repeat the worker's answer exactly."),
     )
