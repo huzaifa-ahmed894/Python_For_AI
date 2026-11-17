@@ -31,9 +31,17 @@ def log_complaint(customer_name: str, order_id: str, phone: str, complaint: str)
     return save_complaint(customer_name, order_id, phone, complaint)
 
 @tool
+<<<<<<< HEAD
 def get_discounts() -> str:
     """Answer questions about today's discount."""
     return "**Today's offer:** Buy 2 Zinger Burgers, get 1 Club Sandwich."
+=======
+def get_discounts() -> dict:
+    """this tool tell about today's discount"""
+    return {
+        "message": "*** Today's Discount *** -- Buy 2 Zinger Burgers get 1 Club Sandwich"
+    }
+>>>>>>> c275fc1d3868eaf16077c28554e97a95b65fd1a0
 
 TOOLS = [
     fetch_menu,
@@ -41,6 +49,8 @@ TOOLS = [
     log_complaint,
     get_discounts
 ]
+
+
 
 
 
