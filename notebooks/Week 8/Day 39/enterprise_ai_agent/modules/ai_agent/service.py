@@ -19,7 +19,7 @@ def chat(query, session_id):
     return result["messages"][-1].content
 
 
-WORKERS = ("menu_agent", "complaint_agent")
+WORKERS = ("menu_agent", "complaint_agent", "get_discount_agent")
 
 
 def is_answer(m):

@@ -45,13 +45,6 @@ def save_complaint(customer_name, order_id, phone, complaint):
         ).fetchone()
     return {"complaint_id": row[0], "status": "Pending"}
 
-
-
-
-
-
-
-
 # def connect():
 #     settings.DATA_DIR.mkdir(parents=True, exist_ok=True)
 #     return sqlite3.connect(settings.DATABASE_PATH, timeout=30)
@@ -73,5 +66,14 @@ def append_messages(session_id, messages):
         connection.executemany(
             "INSERT INTO messages (session_id, message_json) VALUES (?, ?)", rows
         )
+
+
+def delete_session(session_id):
+    """Remove all stored messages for one conversation."""
+    with closing(connect()) as connection, connection:
+        cursor = connection.execute(
+            "DELETE FROM messages WHERE session_id = ?", (session_id,)
+        )
+    return cursor.rowcount
 
 

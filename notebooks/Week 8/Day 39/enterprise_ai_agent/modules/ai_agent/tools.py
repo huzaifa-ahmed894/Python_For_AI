@@ -30,10 +30,16 @@ def log_complaint(customer_name: str, order_id: str, phone: str, complaint: str)
     """Save a customer complaint for a valid order ID."""
     return save_complaint(customer_name, order_id, phone, complaint)
 
+@tool
+def get_discounts() -> str:
+    """Answer questions about today's discount."""
+    return "**Today's offer:** Buy 2 Zinger Burgers, get 1 Club Sandwich."
+
 TOOLS = [
     fetch_menu,
     validate_order_id,
-    log_complaint
+    log_complaint,
+    get_discounts
 ]
 
 
